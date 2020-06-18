@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html Lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Inclusion de bootstrap para manejo mas sencillo del estilo de la pagina -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Superheroes</title>
+</head>
+
+<body>
+
+    <div class= "container" id="listadoHeroes">
+        <h1>Superheroes voladores</h1>
+
+        <!--input para filtrar por nombre-->
+        <br><input type="text" v-model="filtrado" placeholder="Filtrar heroe"/>
+        
+        <!--Contenedor que verifica si el arreglo esta vacio, en caso verdadero arroja error-->
+        <div v-if="heroes.length === 0">
+            <h2 style="color: darkred;">Error al capturar datos: no existen datos o hay problemas con la conexion</h2>
+        </div>
+
+        <!-- contenedor donde se recorre el arreglo y se compara con la condicion para mostrar los datos -->
+        <div class="d-flex justify-content-between" v-for="heroe in filterName" v-if="heroe.puedeVolar === true" v-bind:id="heroe.nombre">
+                <img v-bind:src="heroe.avatarURL"  width="100" height="100" alt="avatar" class="rounded-circle">
+                <h2>{{heroe.nombre}}</h2> <i>Nombre real: {{heroe.nombreReal}}</i>
+        </div>
+        <br>
+
+        <!--Contenedor del superheroe con el id = 1-->
+        <h1>Superheroe N°1</h1>
+        <div class="d-flex justify-content-between">
+            <img v-bind:src= "heroeN1.avatarURL" width="100" height="100" alt="avatar" style="border-radius: 50%;"> 
+            <h2>{{heroeN1.nombre}}</h2> <i>Nombre real: {{heroeN1.nombreReal}}</i>
+        </div>
+    </div>
+    
+    <!-- Inclusion de archivo javascript y de framework Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js.js"></script>
+</body>
+
+</html>
